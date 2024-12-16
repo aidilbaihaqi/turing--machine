@@ -3,22 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mesin Turing: Konversi Kata ke Biner</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Mesin Turing</title>
 </head>
 <body>
-    <div class="container">
-        <h1>Mesin Turing: Konversi Kata ke Biner</h1>
-        <form method="POST">
-            <label for="word">Masukkan Kata (huruf kecil a-z):</label>
-            <input type="text" id="word" name="word" required>
-            <button type="submit">Konversi</button>
-        </form>
-        {% if result %}
-            <div class="result">
-                <pre>{{ result }}</pre>
-            </div>
-        {% endif %}
-    </div>
+    <h1>Mesin Turing untuk Konversi Karakter ke Biner</h1>
+
+    <!-- Form input -->
+    <form method="POST">
+        <label for="word">Masukkan kata (diakhiri dengan ';'):</label>
+        <input type="text" id="word" name="word" required>
+        <button type="submit">Proses</button>
+    </form>
+
+    <!-- Menampilkan hasil output -->
+    {% if result %}
+    <h2>Hasil Proses Mesin Turing</h2>
+    <pre>{{ result }}</pre>
+    {% endif %}
 </body>
 </html>
