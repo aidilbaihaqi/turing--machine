@@ -1,24 +1,163 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mesin Turing</title>
+    <title>Mesin Turing - Dark Theme</title>
+    <style>
+        /* Reset CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #121212; /* Warna latar belakang gelap */
+            color: #e0e0e0; /* Warna teks terang */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            background: #1e1e1e; /* Kontainer dengan warna lebih terang */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            border-radius: 8px;
+            padding: 20px;
+            width: 100%;
+            max-width: 1000px;
+            display: flex;
+            gap: 20px;
+        }
+
+        .form-section {
+            flex: 1;
+            border-right: 2px solid #333;
+            padding-right: 20px;
+        }
+
+        h1, h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #f0f0f0;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #b0b0b0;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #444;
+            background-color: #2b2b2b;
+            color: #f0f0f0;
+            border-radius: 4px;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #6e7dfc;
+            box-shadow: 0 0 5px #6e7dfc;
+        }
+
+        button {
+            background-color: #6e7dfc;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #5a68e8;
+        }
+
+        .output-section {
+            flex: 2;
+            padding-left: 20px;
+        }
+
+        pre {
+            background-color: #2b2b2b;
+            border: 1px solid #444;
+            border-radius: 4px;
+            padding: 15px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-family: 'Courier New', Courier, monospace;
+            color: #d0d0d0;
+        }
+
+        .error-message {
+            color: #ff4d4d;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Mesin Turing untuk Konversi Karakter ke Biner</h1>
+    <div class="container">
+        <!-- Bagian Input Form -->
+        <div class="form-section">
+            <h1>Mesin Turing - Dark Theme</h1>
+            <form id="turing-form" method="POST" onsubmit="return validateInput();">
+                <label for="word">Masukkan kata (diakhiri dengan ';'):</label>
+                <input type="text" id="word" name="word" placeholder="Contoh: abc;" required>
+                <p class="error-message" id="error-message"></p>
+                <button type="submit">Proses</button>
+            </form>
+        </div>
 
-    <!-- Form input -->
-    <form method="POST">
-        <label for="word">Masukkan kata (diakhiri dengan ';'):</label>
-        <input type="text" id="word" name="word" required>
-        <button type="submit">Proses</button>
-    </form>
+        <!-- Bagian Output Hasil -->
+        <div class="output-section">
+            {% if result %}
+            <h2>Hasil Proses Mesin Turing</h2>
+            <pre>{{ result }}</pre>
+            {% else %}
+            <h2>Hasil akan ditampilkan di sini</h2>
+            <p>Silakan masukkan kata pada formulir untuk diproses.</p>
+            {% endif %}
+        </div>
+    </div>
 
-    <!-- Menampilkan hasil output -->
-    {% if result %}
-    <h2>Hasil Proses Mesin Turing</h2>
-    <pre>{{ result }}</pre>
-    {% endif %}
+    <!-- JavaScript untuk Validasi -->
+    <script>
+        function validateInput() {
+            // Ambil nilai input dari form
+            const wordInput = document.getElementById('word').value;
+            const errorMessage = document.getElementById('error-message');
+    
+            // Periksa apakah input diakhiri dengan titik koma
+            if (!wordInput.endsWith(';')) {
+                errorMessage.textContent = "Error: Input tidak valid.";
+                return false; // Batalkan submit form
+            }
+    
+            // Periksa apakah input mengandung huruf besar
+            if (/[A-Z]/.test(wordInput)) {
+                errorMessage.textContent = "Error: Input tidak valid.";
+                return false; // Batalkan submit form
+            }
+    
+            // Jika valid, hapus pesan error
+            errorMessage.textContent = "";
+            return true; // Lanjutkan submit form
+        }
+    </script>
+    
 </body>
 </html>

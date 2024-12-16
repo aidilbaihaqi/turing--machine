@@ -17,6 +17,10 @@ def char_to_binary(char):
     # Balikkan urutan biner untuk mendapatkan hasil akhir
     return ''.join(reversed(binary))
 
+def format_binary_with_spaces(binary_string):
+    """Memformat biner menjadi kelompok 8 karakter yang dipisahkan oleh spasi."""
+    return ' '.join(binary_string[i:i+8] for i in range(0, len(binary_string), 8))
+
 def turing_machine(word):
     """Mesin Turing untuk mengonversi kata menjadi kode biner dengan setiap huruf melalui satu state."""
     tape = list(word)  # Tape input
@@ -40,7 +44,9 @@ def turing_machine(word):
 
         # Jika membaca simbol akhir `;`, pindah ke final state
         if current_char == ';':
-            result.append(f"------------\nTape: {''.join(tape)}\nhead: {current_char}\ncurrent state: {state}\nnext state: {final_state}\nwrite: (empty)\nmove: stay\n------------")
+            # Format biner dengan spasi setiap 8 karakter
+            formatted_tape = format_binary_with_spaces(''.join(tape[:-1]))
+            result.append(f"------------\nTape: {formatted_tape}\nhead: {current_char}\ncurrent state: {state}\nnext state: {final_state}\nwrite: (empty)\nmove: stay\n------------")
             state = final_state
             break
 
@@ -66,12 +72,10 @@ def turing_machine(word):
             # Pindahkan head ke posisi setelah biner
             head += len(binary)
             state = next_state
-        else:
-            # Jika ada simbol tidak valid
-            return "Input tidak valid. Karakter tidak valid ditemukan di tape."
 
     # Tambahkan output akhir setelah semua langkah selesai
-    result.append(f"output : {''.join(tape[:-1])}")  # Hapus simbol `;` dari output
+    formatted_output = format_binary_with_spaces(''.join(tape[:-1]))  # Hapus simbol `;` dari output
+    result.append(f"output : {formatted_output}")
     return '\n'.join(result)
 
 @app.route("/", methods=["GET", "POST"])
@@ -83,4 +87,4 @@ def index():
     return render_template("index.html", result=output)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)
