@@ -1,3 +1,11 @@
+# Proyek Akhir Mata Kuliah Tata Bahasa Formal dan Otomata
+## Program Mesin Turing Konversi Kata ke Biner dengan Python.
+
+## Kelompok
+- Rivandi Ismanto (2301020101)
+- Aidil Baihaqi (2301020006)
+- Fajri Hasan (2301020035)
+
 
 ## Instal Python
 
